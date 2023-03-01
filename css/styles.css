@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100vh;
+
+    font-family: sans-serif;
+}
+
+.character-table {
+    display: flex;
+
+    flex-direction: column;
+
+    border-style: solid;
+    width: 15%;
+
+    text-align: center;
+}
+
+.character {
+    display: flex;
+    min-width: 100%;
+    justify-content: space-between;
+}
+
+.modifier {
+    position: relative;
+    width: 40px;
+    right: 10px;
+}
+
+.close {
+    position: absolute;
+    right: 30%;
+    height: 20px;
+
+}
