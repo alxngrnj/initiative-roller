@@ -5,15 +5,21 @@
 }
 
 body {
+    background-image: url('https://thumbs.gfycat.com/BlondIllustriousHorsechestnutleafminer-max-1mb.gif');
+    background-size: cover;
+}
+
+main {
     display: flex;
 
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     min-height: 100vh;
 
-    font-family: sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 .character-table {
@@ -27,7 +33,8 @@ body {
     text-align: center;
 }
 
-.character {
+.character,
+.top-row {
     display: flex;
     min-width: 100%;
     justify-content: space-between;
