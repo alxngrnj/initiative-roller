@@ -22,13 +22,36 @@ main {
     background-color: rgba(255, 255, 255, 0.7);
 }
 
+h1 {
+    position: fixed;
+
+    top: 13vh;
+}
+
+h3 {
+    position: fixed;
+    top: 19vh;
+}
+
+.input-container {
+    display: flex;
+
+    justify-content: space-between;
+
+    width: 20%;
+    position: fixed;
+    top: 27vh;
+}
+
 .character-table {
     display: flex;
 
     flex-direction: column;
 
+    position: fixed;
+    top: 32vh;
     border-style: solid;
-    width: 15%;
+    width: 20%;
 
     text-align: center;
 }
@@ -38,17 +61,17 @@ main {
     display: flex;
     min-width: 100%;
     justify-content: space-between;
+    align-items: center;
+    padding: 2px 20px;
 }
 
 .modifier {
-    position: relative;
     width: 40px;
-    right: 10px;
 }
 
 .close {
     position: absolute;
-    right: 30%;
-    height: 20px;
+    left: 17.9vw;
+    height: 15px;
 
 }
