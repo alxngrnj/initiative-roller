@@ -1,3 +1,9 @@
+function dieRoll() {
+    min = Math.ceil(1);
+    max = Math.floor(10);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 document.querySelector('form').addEventListener('submit', (event) => {
     event.stopPropagation();
     event.preventDefault();
@@ -34,9 +40,15 @@ document.querySelector('#roll').addEventListener('click', (event) => {
     let act = "Act: ";
 
     for (let chara of document.querySelectorAll('.character')) {
+        let initiativeRoll = (dieRoll() + Number(chara.querySelector('input').value));
+
+        if (initiativeRoll < 0) {
+            initiativeRoll = 0;
+        }
+
         rolls.push({
             name: chara.querySelector('p').textContent,
-            roll: (Math.floor(Math.random() * 11) + Number(chara.querySelector('input').value))
+            roll: initiativeRoll
         })
     }
     rolls.sort((a, b) => {
