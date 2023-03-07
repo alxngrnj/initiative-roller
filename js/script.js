@@ -29,24 +29,27 @@ document.querySelector('form').addEventListener('submit', (event) => {
         newChara.appendChild(newCharaName);
         newChara.appendChild(newCharaModif);
         newChara.appendChild(removeNewChara);
-        document.querySelector('.character-container').appendChild(newChara);
+        document.querySelector('.content-column').appendChild(newChara);
 
         document.querySelector('form').querySelector('input').value = '';
     } else {
         return;
     }
-})
+});
 
 document.querySelector('#roll').addEventListener('click', (event) => {
     event.stopPropagation();
 
-    if (document.getElementsByClassName('character').length < 1) {
-        alert('No characters!');
-    } else {
-
+    if (document.getElementsByClassName('character').length > 0) {
         const rolls = [];
-        let declare = "Declare action: ";
-        let act = "Act: ";
+        const title = document.createElement('h4');
+        const actingDiv = document.createElement('div');
+        const actingOrder = document.createElement('ol');
+
+        if (document.querySelector('.roll-column').style.display == 'flex') {
+            document.querySelector('.roll-column').innerHTML = '';
+        }
+
 
         for (let chara of document.querySelectorAll('.character')) {
             let initiativeRoll = (dieRoll(document.querySelector('#dice').value) + Number(chara.querySelector('input').value));
@@ -62,29 +65,45 @@ document.querySelector('#roll').addEventListener('click', (event) => {
         }
         rolls.sort((a, b) => {
             return a.roll - b.roll;
-        })
+        });
 
-        for (let declaringRoll of rolls) {
-            declare += declaringRoll.name + `(${declaringRoll.roll})`;
-            if (rolls.indexOf(declaringRoll) < (rolls.length - 1)) {
-                declare += ", "
-            } else {
-                declare += "."
+        actingDiv.classList.add('acting-order');
+        title.textContent = 'Action order';
+        document.querySelector('.roll-column').appendChild(title);
+
+        if (document.querySelector('#dice').value == 'd10') {
+
+            const declareDiv = document.createElement('div');
+            const declareOrder = document.createElement('ol');
+            const declareSubtitle = document.createElement('h5');
+            const actingSubtitle = document.createElement('h5');
+
+            declareDiv.classList.add('declare-order');
+            actingSubtitle.textContent = 'Acting';
+            declareSubtitle.textContent = 'Declaring';
+            for (const declaringRoll of rolls) {
+                const newEntry = document.createElement('li');
+                newEntry.textContent = declaringRoll.name + `(${declaringRoll.roll})`;
+                declareOrder.appendChild(newEntry);
             }
+
+            declareDiv.appendChild(declareSubtitle);
+            declareDiv.appendChild(declareOrder);
+            document.querySelector('.roll-column').appendChild(declareDiv);
+            actingDiv.appendChild(actingSubtitle);
         }
+
         rolls.reverse();
         for (let actingRoll of rolls) {
-            act += actingRoll.name + `(${actingRoll.roll})`;
-            if (rolls.indexOf(actingRoll) < (rolls.length - 1)) {
-                act += ", "
-            } else {
-                act += "."
-            }
+            const newEntry = document.createElement('li');
+            newEntry.textContent = actingRoll.name + `(${actingRoll.roll})`;
+            actingOrder.appendChild(newEntry);
         }
 
-        console.log(`
-    ${declare}
-    ${act}
-    `);
+        actingDiv.appendChild(actingOrder);
+        document.querySelector('.roll-column').appendChild(actingDiv);
+        document.querySelector('.roll-column').style.display = 'flex';
+    } else {
+        alert('No characters!');
     }
 })
