@@ -1,6 +1,11 @@
-function dieRoll() {
-    min = Math.ceil(1);
-    max = Math.floor(10);
+function dieRoll(die) {
+    if (die == 'd10') {
+        min = Math.ceil(1);
+        max = Math.floor(10);
+    } else {
+        min = Math.ceil(1);
+        max = Math.floor(20);
+    }
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -24,7 +29,7 @@ document.querySelector('form').addEventListener('submit', (event) => {
         newChara.appendChild(newCharaName);
         newChara.appendChild(newCharaModif);
         newChara.appendChild(removeNewChara);
-        document.querySelector('.character-table').appendChild(newChara);
+        document.querySelector('.character-container').appendChild(newChara);
 
         document.querySelector('form').querySelector('input').value = '';
     } else {
@@ -35,46 +40,51 @@ document.querySelector('form').addEventListener('submit', (event) => {
 document.querySelector('#roll').addEventListener('click', (event) => {
     event.stopPropagation();
 
-    const rolls = [];
-    let declare = "Declare action: ";
-    let act = "Act: ";
+    if (document.getElementsByClassName('character').length < 1) {
+        alert('No characters!');
+    } else {
 
-    for (let chara of document.querySelectorAll('.character')) {
-        let initiativeRoll = (dieRoll() + Number(chara.querySelector('input').value));
+        const rolls = [];
+        let declare = "Declare action: ";
+        let act = "Act: ";
 
-        if (initiativeRoll < 0) {
-            initiativeRoll = 0;
+        for (let chara of document.querySelectorAll('.character')) {
+            let initiativeRoll = (dieRoll(document.querySelector('#dice').value) + Number(chara.querySelector('input').value));
+
+            if (initiativeRoll < 0) {
+                initiativeRoll = 0;
+            }
+
+            rolls.push({
+                name: chara.querySelector('p').textContent,
+                roll: initiativeRoll
+            })
         }
-
-        rolls.push({
-            name: chara.querySelector('p').textContent,
-            roll: initiativeRoll
+        rolls.sort((a, b) => {
+            return a.roll - b.roll;
         })
-    }
-    rolls.sort((a, b) => {
-        return a.roll - b.roll;
-    })
 
-    for (let declaringRoll of rolls) {
-        declare += declaringRoll.name + `(${declaringRoll.roll})`;
-        if (rolls.indexOf(declaringRoll) < (rolls.length - 1)) {
-            declare += ", "
-        } else {
-            declare += "."
+        for (let declaringRoll of rolls) {
+            declare += declaringRoll.name + `(${declaringRoll.roll})`;
+            if (rolls.indexOf(declaringRoll) < (rolls.length - 1)) {
+                declare += ", "
+            } else {
+                declare += "."
+            }
         }
-    }
-    rolls.reverse();
-    for (let actingRoll of rolls) {
-        act += actingRoll.name + `(${actingRoll.roll})`;
-        if (rolls.indexOf(actingRoll) < (rolls.length - 1)) {
-            act += ", "
-        } else {
-            act += "."
+        rolls.reverse();
+        for (let actingRoll of rolls) {
+            act += actingRoll.name + `(${actingRoll.roll})`;
+            if (rolls.indexOf(actingRoll) < (rolls.length - 1)) {
+                act += ", "
+            } else {
+                act += "."
+            }
         }
-    }
 
-    console.log(`
+        console.log(`
     ${declare}
     ${act}
     `);
+    }
 })
