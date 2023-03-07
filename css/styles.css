@@ -37,22 +37,30 @@ h3 {
     display: flex;
 
     justify-content: space-between;
+    align-items: center;
 
-    width: 20%;
+    width: 40vw;
     position: fixed;
     top: 27vh;
 }
 
-.character-table {
+.content-container {
+    display: flex;
+
+    justify-content: space-between;
+    position: fixed;
+    top: 32vh;
+    width: 40vw;
+    border-style: solid;
+}
+
+.content-column {
     display: flex;
 
     flex-direction: column;
+    width: 49%;
 
-    position: fixed;
-    top: 32vh;
-    border-style: solid;
-    width: 20%;
-
+    border: solid;
     text-align: center;
 }
 
@@ -71,7 +79,32 @@ h3 {
 
 .close {
     position: absolute;
-    left: 17.9vw;
+    left: 17.5vw;
     height: 15px;
+}
 
+.roll-column {
+    display: none;
+
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    padding: 2px 20px;
+}
+
+.roll-column h4 {
+    min-width: 100%;
+}
+
+.acting-order {
+    text-align: right;
+    width: 19%;
+    padding-right: 5vw;
+}
+
+.declare-order {
+    text-align: left;
+    width: 19%;
+    padding-left: 0.5vw;
 }
