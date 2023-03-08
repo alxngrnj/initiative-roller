@@ -19,8 +19,8 @@ document.querySelector('input').addEventListener('keypress', (event) => {
         const removeNewChara = document.createElement('img');
         const modifRemoveDiv = document.createElement('div');
 
-        if (document.querySelector('.top-row').style.display = 'none') {
-            document.querySelector('.top-row').style.display = 'flex';
+        if (document.querySelector('.character-list').style.display = 'none') {
+            document.querySelector('.character-list').style.display = 'flex';
         }
 
         newChara.classList.add('character');
@@ -32,6 +32,11 @@ document.querySelector('input').addEventListener('keypress', (event) => {
         removeNewChara.classList.add('close');
         removeNewChara.addEventListener('click', (event) => {
             removeNewChara.closest('.character').remove();
+
+            if (document.querySelectorAll('.character').length < 1) {
+                document.querySelector('.character-list').style.display = 'none';
+                document.querySelector('.roll-column').style.display = 'none';
+            }
         })
         modifRemoveDiv.style.display = 'flex';
         newChara.appendChild(newCharaName);
