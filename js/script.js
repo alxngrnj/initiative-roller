@@ -9,36 +9,46 @@ function dieRoll(die) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-document.querySelector('form').addEventListener('submit', (event) => {
+document.querySelector('input').addEventListener('keypress', (event) => {
     event.stopPropagation();
-    event.preventDefault();
 
-    if (document.querySelector('form').querySelector('input').value) {
+    if (event.key == 'Enter' && document.querySelector('input').value) {
         const newChara = document.createElement('div');
         const newCharaName = document.createElement('p');
         const newCharaModif = document.createElement('input');
         const removeNewChara = document.createElement('img');
+        const modifRemoveDiv = document.createElement('div');
+
+        if (document.querySelector('.top-row').style.display = 'none') {
+            document.querySelector('.top-row').style.display = 'flex';
+        }
 
         newChara.classList.add('character');
         newCharaModif.type = 'number';
         newCharaModif.ariaLabel = 'number';
-        newCharaName.textContent = document.querySelector('form').querySelector('input').value;
+        newCharaName.textContent = document.querySelector('input').value;
         removeNewChara.src = '../assets/close.png';
         newCharaModif.classList.add('modifier');
         removeNewChara.classList.add('close');
+        removeNewChara.addEventListener('click', (event) => {
+            removeNewChara.closest('.character').remove();
+        })
+        modifRemoveDiv.style.display = 'flex';
         newChara.appendChild(newCharaName);
-        newChara.appendChild(newCharaModif);
-        newChara.appendChild(removeNewChara);
-        document.querySelector('.content-column').appendChild(newChara);
+        modifRemoveDiv.appendChild(newCharaModif);
+        modifRemoveDiv.appendChild(removeNewChara);
+        newChara.appendChild(modifRemoveDiv);
+        document.querySelector('.character-list').appendChild(newChara);
 
-        document.querySelector('form').querySelector('input').value = '';
+        document.querySelector('input').value = '';
     } else {
         return;
     }
 });
 
-document.querySelector('#roll').addEventListener('click', (event) => {
+document.querySelector('form').addEventListener('submit', (event) => {
     event.stopPropagation();
+    event.preventDefault();
 
     if (document.getElementsByClassName('character').length > 0) {
         const rolls = [];
@@ -71,8 +81,9 @@ document.querySelector('#roll').addEventListener('click', (event) => {
         title.textContent = 'Action order';
         document.querySelector('.roll-column').appendChild(title);
 
-        if (document.querySelector('#dice').value == 'd10') {
-
+        if (document.querySelector('#dice').value == 'd20') {
+            document.querySelector('.roll-column').style.flexDirection = "column";
+        } else {
             const declareDiv = document.createElement('div');
             const declareOrder = document.createElement('ol');
             const declareSubtitle = document.createElement('h5');
@@ -91,6 +102,7 @@ document.querySelector('#roll').addEventListener('click', (event) => {
             declareDiv.appendChild(declareOrder);
             document.querySelector('.roll-column').appendChild(declareDiv);
             actingDiv.appendChild(actingSubtitle);
+            document.querySelector('.roll-column').style.flexDirection = "row";
         }
 
         rolls.reverse();
@@ -103,6 +115,7 @@ document.querySelector('#roll').addEventListener('click', (event) => {
         actingDiv.appendChild(actingOrder);
         document.querySelector('.roll-column').appendChild(actingDiv);
         document.querySelector('.roll-column').style.display = 'flex';
+
     } else {
         alert('No characters!');
     }
