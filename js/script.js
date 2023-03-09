@@ -27,7 +27,7 @@ document.querySelector('input').addEventListener('keypress', (event) => {
         newCharaModif.type = 'number';
         newCharaModif.ariaLabel = 'number';
         newCharaName.textContent = document.querySelector('input').value;
-        removeNewChara.src = '../assets/close.png';
+        removeNewChara.src = 'assets/close.png';
         newCharaModif.classList.add('modifier');
         removeNewChara.classList.add('close');
         removeNewChara.addEventListener('click', (event) => {
