@@ -35,6 +35,6 @@ White Wolf systems organize turn order a bit differently from other systems, mak
 ![image](https://user-images.githubusercontent.com/107624296/223905191-0ceca7eb-a25d-463f-a1c4-ec38e4332fcc.png)
 ![image](https://user-images.githubusercontent.com/107624296/223905232-783e2d47-0aa0-4cf7-a308-cf80addc582b.png)
 
-#### And that's it! I deployed this experimental app using [Vercel](https://vercel.com/) and will keep updating it as I learn new ways to make it better!
+#### And that's it! I [deployed](https://initiative-roller.vercel.app/) this experimental app using [Vercel](https://vercel.com/) and will keep updating it as I learn new ways to make it better!
 
 
