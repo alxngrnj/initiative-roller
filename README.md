@@ -3,7 +3,7 @@
 Hi! I'm Alexon, a brazilian developer passionate about TTRPG and this is my project, I hope it's useful to you in your games! :)
 
 The thing about initiative rolls in TTRPGs is that you are always forced to use a static value or spend an eternity rolling dice every turn to determine who goes first, right? Well, not anymore!
-There are very few steps to this process and I'll walk you through it below.
+There are very few steps to this process and I'll walk you through them below.
 
 ## Step 1: Add a new character to the list
 This is the view you get right after opening the app:  
